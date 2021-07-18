@@ -75,19 +75,47 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int boardInsert(BoardVO vo) { //
 		int n = 0;
+		String sql = "insert into board(boardid,writer,title,subject) values(?,?,?,?)";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, vo.getBoardId());
+			psmt.setString(2, vo.getWriter());
+			psmt.setString(3, vo.getTitle());
+			psmt.setString(4, vo.getSubject());
+			n = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return n;
-	}
-
+	}//end of BI
+	
 	@Override
 	public int boardUpdate(BoardVO vo) {
 		int n = 0;
+		String sql = "update board set title = ?, subject = ? where boardid = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, vo.getTitle());
+			psmt.setString(2, vo.getSubject());
+			psmt.setString(3, vo.getBoardId());
+			n = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return n;
 	}
-
+	
 	@Override
 	public int boardDelete(BoardVO vo) {
 		int n = 0;
+		String sql = "delete from board where boardid = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, vo.getBoardId());
+			n = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return n;
-	}
-
-}
+	}//end of BD
+}//end of class
