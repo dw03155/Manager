@@ -83,21 +83,55 @@ public class MemberServiceImpl extends Dao implements MemberService {
 	}
 
 	@Override
-	public int memberInsert(MemberVO vo) {
+	public int memberInsert(MemberVO vo) { // 데이터 삽입
 		int n = 0;
+		String sql = "insert into member values(?,?,?,?,?,?,?)";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, vo.getId()); 
+			psmt.setString(2, vo.getPassword());
+			psmt.setString(3, vo.getName());
+			psmt.setString(4, vo.getAddress());
+			psmt.setString(5, vo.getTel());
+			psmt.setInt(6, vo.getAge());
+			psmt.setString(7,vo.getAuthor());
+			n = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return n;
-	}
+	}// end of MI
 
 	@Override
-	public int memberDelete(MemberVO vo) {
+	public int memberUpdate(MemberVO vo) { // 데이터 수정
 		int n = 0;
+		String sql = "update member set name = ?, address = ?, tel = ?, age = ?, author = ? where id = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, vo.getName());
+			psmt.setString(2, vo.getAddress());
+			psmt.setString(3, vo.getTel());
+			psmt.setInt(4, vo.getAge());
+			psmt.setString(5,vo.getAuthor());
+			psmt.setString(6, vo.getId());
+			n = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return n;
-	}
+	}// end of MU
 
 	@Override
-	public int memberUpdate(MemberVO vo) {
+	public int memberDelete(MemberVO vo) { // 데이터 삭제
 		int n = 0;
+		String sql = "delete from member where id = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, vo.getId());
+			n = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return n;
-	}
-
-}
+	}// end of MD
+}// end of class
