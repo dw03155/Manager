@@ -105,15 +105,13 @@ public class MemberServiceImpl extends Dao implements MemberService {
 	@Override
 	public int memberUpdate(MemberVO vo) { // 데이터 수정
 		int n = 0;
-		String sql = "update member set name = ?, address = ?, tel = ?, age = ?, author = ? where id = ?";
+		String sql = "update member set address = ?, tel = ?, age = ? where id = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, vo.getName());
-			psmt.setString(2, vo.getAddress());
-			psmt.setString(3, vo.getTel());
-			psmt.setInt(4, vo.getAge());
-			psmt.setString(5,vo.getAuthor());
-			psmt.setString(6, vo.getId());
+			psmt.setString(1, vo.getAddress());
+			psmt.setString(2, vo.getTel());
+			psmt.setInt(3, vo.getAge());
+			psmt.setString(4, vo.getId());
 			n = psmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

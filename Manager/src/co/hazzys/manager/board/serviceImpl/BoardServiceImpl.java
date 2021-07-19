@@ -62,7 +62,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	private void updateHit(String boardId) { // 조회수를 증가시킨다.
-		String sql = "update board set hit = hit +1 where id = ?"; // ?에 들어갈 값 boardId
+		String sql = "update board set hit = hit +1 where boardid = ?"; // ?에 들어갈 값 boardId
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, boardId); // ?에 들어갈 값 넣어줌
