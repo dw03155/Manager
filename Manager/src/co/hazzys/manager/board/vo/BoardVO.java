@@ -14,7 +14,7 @@ public class BoardVO {
 		return boardId;
 	}
 
-	public void setBoardid(String boardId) {
+	public void setBoardId(String boardId) {
 		this.boardId = boardId;
 	}
 

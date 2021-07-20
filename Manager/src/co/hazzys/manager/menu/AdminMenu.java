@@ -165,23 +165,23 @@ public class AdminMenu {
 	}//end of BL
 
 	private void boardSelect() { // 글 조회
-		BoardVO list = new BoardVO();
+		BoardVO vo = new BoardVO();
 		System.out.println("조회할 글번호 > ");
-		list.setBoardid(sc.nextLine());
-		list = boDao.boardSelect(list);
-		System.out.println(list.getSubject());
+		vo.setBoardId(sc.next());sc.nextLine();
+		vo = boDao.boardSelect(vo);
+		System.out.println(vo.getSubject());
 	}// end of BS
 
 	private void boardInsert() { // 글 쓰기
 		BoardVO vo = new BoardVO();
 		System.out.print("글번호 > ");
-		vo.setBoardid(sc.next()); sc.nextLine();
+		vo.setBoardId(sc.next()); sc.nextLine();
 		System.out.print("글제목 > ");
 		vo.setTitle(sc.nextLine());
 		System.out.print("글내용 > ");
 		vo.setSubject(sc.nextLine());
 		System.out.print("작성자 > ");
-		vo.setWriter(sc.next()); sc.nextLine();
+		vo.setWriter(sc.nextLine());
 
 		int n = boDao.boardInsert(vo);
 		if (n != 0)
@@ -193,7 +193,7 @@ public class AdminMenu {
 	private void boardUpdate() { // 글 수정 (본인글만)
 		BoardVO vo = new BoardVO();
 		System.out.println("수정할 글 번호 > ");
-		vo.setBoardid(sc.next());sc.nextLine();
+		vo.setBoardId(sc.next());sc.nextLine();
 		System.out.println("수정할 글 제목 > ");
 		vo.setTitle(sc.nextLine());
 		System.out.println("수정할 글 내용 > ");
@@ -209,7 +209,7 @@ public class AdminMenu {
 	private void boardDelete() { // 글 삭제
 		BoardVO vo = new BoardVO();
 		System.out.println("삭제할 글 번호 > ");
-		vo.setBoardid(sc.next());sc.nextLine();
+		vo.setBoardId(sc.next());sc.nextLine();
 
 		int n = boDao.boardDelete(vo);
 		if (n != 0)

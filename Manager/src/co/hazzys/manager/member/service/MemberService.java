@@ -9,7 +9,6 @@ public interface MemberService {
 	MemberVO memberSelect(MemberVO vo);	//회원 조회
 	MemberVO loginCheck(MemberVO vo);	//로그인 처리
 	int memberInsert(MemberVO vo);		//회원 추가
-	int memberDelete(MemberVO vo);		//회원 삭제
 	int memberUpdate(MemberVO vo);		//회원 수정
-
+	int memberDelete(MemberVO vo);		//회원 삭제
 }

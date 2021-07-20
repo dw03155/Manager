@@ -26,7 +26,7 @@ public class BoardServiceImpl implements BoardService {
 			rs = psmt.executeQuery();
 			while (rs.next()) {
 				vo = new BoardVO(); // vo 초기화
-				vo.setBoardid(rs.getString("boardid"));
+				vo.setBoardId(rs.getString("boardid"));
 				vo.setWriter(rs.getString("writer"));
 				vo.setTitle(rs.getString("title"));
 				vo.setEnterdate(rs.getDate("enterdate"));
@@ -42,17 +42,13 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public BoardVO boardSelect(BoardVO vo) { // 글 조회 (한건조회)
-		String sql = "select * from board where boardid = ?";
+		String sql = "select subject from board where boardid = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, vo.getBoardId());
 			rs = psmt.executeQuery();
 			if (rs.next()) {
-				vo.setBoardid(rs.getString("boardid"));
-				vo.setWriter(rs.getString("writer"));
-				vo.setTitle(rs.getString("title"));
-				vo.setEnterdate(rs.getDate("enterdate"));
-				vo.setHit(rs.getInt("hit"));
+				vo.setSubject(rs.getString("subject"));
 				updateHit(vo.getBoardId());//조회수 증가시키는 method
 			}
 		} catch (SQLException e) {

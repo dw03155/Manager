@@ -32,27 +32,32 @@ public class UserMenu {
 
 	private void userMenu(MemberVO vo) {
 		System.out.println(vo.getName() + "님 사용자로 로그인되었습니다.");
-		title();
 		boolean run = false;
 		do {
+			title();
 			int chk;
 			switch (chk = sc.nextInt()) {
 			case 1:
+				sc.nextLine();
 				myPage(); // 마이페이지
 				break;
 			case 2:
 				boardList(); // 글 목록
 				break;
 			case 3:
+				sc.nextLine();
 				boardSelect();// 글 조회
 				break;
 			case 4:
+				sc.nextLine();
 				boardInsert(); // 글 입력
 				break;
 			case 5:
+				sc.nextLine();
 				boardUpdate(vo.getId()); // 글 수정
 				break;
 			case 6:
+				sc.nextLine();
 				boardDelete(); // 글 삭제
 				break;
 			case 7:
@@ -65,11 +70,14 @@ public class UserMenu {
 
 	private void myPage() { // 마이페이지
 		MemberVO vo = new MemberVO();
-		System.out.println("수정할 주소 > ");
+		System.out.print("수정할 ID를 검색하세요.");
+		vo.setId(sc.next());
+		sc.nextLine();
+		System.out.print("수정할 주소 > ");
 		vo.setAddress(sc.nextLine());
-		System.out.println("수정할 번호 > ");
+		System.out.print("수정할 번호 > ");
 		vo.setTel(sc.nextLine());
-		System.out.println("수정할 나이 > ");
+		System.out.print("수정할 나이 > ");
 		vo.setAge(sc.nextInt());
 		sc.nextLine();
 
@@ -92,23 +100,23 @@ public class UserMenu {
 	private void boardSelect() { // 글 조회
 		BoardVO vo = new BoardVO();
 		System.out.print("조회할 글번호 > ");
-		vo.setBoardid(sc.next());
+		vo.setBoardId(sc.next());
 		sc.nextLine();
+		vo = boDao.boardSelect(vo);
 		System.out.println(vo.getSubject());
 	}// end of BS
 
 	private void boardInsert() { // 글 입력
 		BoardVO vo = new BoardVO();
 		System.out.print("글번호 > ");
-		vo.setBoardid(sc.next());
+		vo.setBoardId(sc.next());
 		sc.nextLine();
 		System.out.print("글제목 > ");
 		vo.setTitle(sc.nextLine());
 		System.out.print("글내용 > ");
 		vo.setSubject(sc.nextLine());
 		System.out.print("작성자 > ");
-		vo.setWriter(sc.next());
-		sc.nextLine();
+		vo.setWriter(sc.nextLine());
 
 		int n = boDao.boardInsert(vo);
 		if (n != 0)
@@ -122,7 +130,7 @@ public class UserMenu {
 		System.out.println("수정할 글 번호 > ");
 		String boardId = sc.next();
 		sc.nextLine();
-		vo.setBoardid(boardId);
+		vo.setBoardId(boardId);
 		vo = boDao.boardSelect(vo);
 		if (vo.getWriter().equals(id)) {
 			vo = new BoardVO();
@@ -131,7 +139,7 @@ public class UserMenu {
 			System.out.println("수정할 글 내용 > ");
 			vo.setSubject(sc.nextLine());
 			vo.setWriter(id);
-			vo.setBoardid(boardId);
+			vo.setBoardId(boardId);
 			int n = boDao.boardUpdate(vo);
 			if (n != 0)
 				System.out.println("수정을 성공하였습니다.");
@@ -146,7 +154,7 @@ public class UserMenu {
 	private void boardDelete() { // 글 삭제
 		BoardVO vo = new BoardVO();
 		System.out.println("삭제할 글 번호 > ");
-		vo.setBoardid(sc.next());
+		vo.setBoardId(sc.next());
 		sc.nextLine();
 
 		int n = boDao.boardDelete(vo);
